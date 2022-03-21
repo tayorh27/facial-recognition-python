@@ -73,20 +73,16 @@ def main():
             elif checkExist(path) == 0:
                 os.makedirs(path)
                 win["taken"].update(visible = False)
-            while count<10:#inside for loop
-                win["collect"].update(visible = True)                
+                win["submitname"].update(disabled = True)
+
+            while count<50:#inside for loop
                 name = "./Images/" + nameID + "/" + str(count) + ".jpg"
-                print("Creating images....." + name)
-                cv.imwrite(name, mframe[y:y+h, x:x+w])
-                time.sleep(1)
-                win["collect"].update(visible = False)
+                if faces is not None:
+                    print("Creating images....." + name)
+                    cv.imwrite(name, mframe)
                 count += 1
             win["complete"].update(visible = True)
-            win["-Newname-"].update(visible = False)
             win["-NewUserBtn-"].update(visible = False)
-            win["collect"].update(visible = False)
-            win["submitname"].update(visible = False)
-            win["-NewUserMsg-"].update(visible = False)
             facetrain.trainer()
 
 
